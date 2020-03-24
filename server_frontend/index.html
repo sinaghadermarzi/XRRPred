@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="title" content="XRRPred">
+    <meta name="description" content="X-ray crystallography Resoultion and R-free Prediction Tool - web server from Biomine lab">
+    <meta name="author" content="Sina Ghadermarzi, Bartosz Krawczik, Lukasz Kurgan">
+    <meta name="keywords" content="Lukasz Kurgan, Virginia Commonwealth University, Richmond, Bioinformatics, Computational Biology, Proteomics, Intrinsic Disorder, Proteome, Structure, Protein, Intelligent Recommendation">
+
+    <title>XRRPred</title>
+
+    <link rel="stylesheet" href="../../css/bootstrap.css">
+    <link rel="stylesheet" href="../../assets/css/custom.min.css">
+    <link rel="stylesheet" href="../biomine.css">
+
+    <script src="../functions.js"></script>
+    <script src="http://code.jquery.com/jquery-1.4.2.js"></script>
+    <script type="text/javascript">
+      function download_to_textbox(url, el) {
+        $.get(url, null, function(data) {
+                           el.val(data);
+                         }, "text");
+      }
+
+      $(function() {
+        $('#Example').click(function() {
+          form1.seq.disabled = false;
+          form1.data.value = '';
+          document.querySelector('.uploadpath').innerHTML = 'No file chosen';
+          download_to_textbox("./example_textbox.txt", $("textarea[name='seq']"));
+        });
+      });
+    </script>
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-5418207-3']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+    </script>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-53867503-5', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-lg-offset-2">
+          <h1><span class="acronym">XRRPred</span> - <span class="acronym">X</span>-ray Crystallography <span class="acronym">R</span>esolution and <span class="acronym">R</span>-free <span class="acronym">Pred</span>iction Tool</h1>
+          <p class="menu">
+            <a href="#Help">Help</a> |
+            <a href="#Materials">Materials</a> |
+            <a href="#References">References</a> |
+            <a href="#Acknowledgments">Acknowledgments</a> |
+            <a target="_blank" href="http://biomine.cs.vcu.edu/Disclaimer.html">Disclaimer</a> |
+            <a target="_blank" href="http://biomine.cs.vcu.edu">Biomine</a>
+          </p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-8 col-lg-offset-2">
+          <h2>XRRPred webserver</h2>
+          <p>The server predicts resolution and R-free for a protein from protein sequence </p>
+		  
+
+          <div class="well">
+            <form name="form1" class="form-horizontal" target="_blank" action="../biomine.php?name=XRRPred" enctype="multipart/form-data" method="post">
+              <p class="def">Please follow the three steps below to make predictions:</p>
+
+              <h3>1. Upload a <a href="#FASTA">FASTA</a> file for one or more (up to 1000) proteins, or use the text area for one protein (paste chain sequences into the <a href="#TEXTBOX">text area</a>. Use example button for an example text input) </h3>
+              <input type="file" class="uploadfile" name="data" id="upload" onchange="form1.seq.disabled=true;form1.seq.value='';">
+              <label for="upload"><span class="btn">Choose a file</span><span class="uploadpath">No file chosen</span></label>
+
+              <textarea rows="10" name="seq" ></textarea>
+              <input class="btn" type="button" id="Example" value="Example" >
+              <input class="btn" type="button" value="Reset sequence(s)" onclick="form1.seq.disabled=false; form1.seq.value=''; form1.data.value=''; document.querySelector('.uploadpath').innerHTML='No file chosen';">
+
+              <h3>2. Provide your e-mail address (optional)</h3>
+              <p class="def">Please provide your e-mail address to be notified when results are ready.</p>
+              <input type="email" name="email1" value="">
+
+              <h3>3. Predict:</h3>
+              <p class="def">Click button to launch prediction.</p>
+              <input class="btn" type="submit" name="Button1" value="Run XRRPred" onclick="
+                if (checkform(1000, form1)==true) {
+                  this.form.submit();
+                  form1.seq.disabled = false;
+                  form1.seq.value='';
+                  form1.data.value='';
+                  document.querySelector('.uploadpath').innerHTML='No file chosen';
+                }
+                return (false);">
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-8 col-lg-offset-2">
+          <h2 id="Input">Input</h2>
+          <p>
+            XRRPred accepts either single or multiple protein inputs. 
+			For running prediction for one or more (up to 1000) proteins you can upload a FASTA formatted file.
+			
+            If you want to input one protein you can also use the text field to input the chain sequences for that protein.
+			
+          </p>
+		  <h3 id="FASTA">FASTA file format</h3>
+          <p>
+		  In the FASTA file each entry is a protein.
+		  Inside the entry each line represents a chain sequence.  
+          </p>
+          <ul>
+            <li>Line1: &gt;protein-1 ID</li>
+            <li>Line2: chain-1 sequence (1-letter amino acid encoding)</li>
+			<li>Line3: chain-2 sequence (1-letter amino acid encoding)</li>
+			<li>Line4: &gt;protein-2 ID</li>
+			<li>Line5: chain-1 sequence (1-letter amino acid encoding)</li>
+			<li>Line6: chain-2 sequence (1-letter amino acid encoding)</li>
+          </ul>
+		  <p>
+			(Here is <a target="_blank" href="./examples.fasta">an example of input file</a> where XRRPred normally takes around one minute to predict 100 proteins with average size of 500 AAs.):
+			</p>
+			<h3 id="TEXTBOX">Text Input</h3>
+			<p>
+			to enter a single protein, enter chain sequences separated by new line in the text area. To see the example use the example button
+			</p>
+			
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-8 col-lg-offset-2">
+          <h2 id="Materials">Materials</h2>
+          <ul>
+            <li><a target="_blank" href="./TRAINING.fasta">TRAINING dataset</a></li>
+            <li><a target="_blank" href="./TEST.fasta">TEST dataset</a></li>
+          </ul>
+
+          <ul>
+            Explanation of TRAINING and TEST dataset
+            <li>Line 1: &gt;protein ID</li>
+            <li>Line 2: protein sequence (1-letter amino acid encoding)</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-8 col-lg-offset-2">
+          <h2 id="References">References</h2>
+          <p>Upon the usage the users are requested to use the following citation:</p>
+          <ul>
+            <li>
+              <a target="_blank" href="*************************************">
+                *****************
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-8 col-lg-offset-2">
+          <h2 id="Acknowledgments">Acknowledgments</h2>
+          <p>We acknowledge with thanks the following software used as a part of this server:</p>
+          <ul>
+            <li>
+              <a target="_blank" href="http://www.biology.wustl.edu/gcg/seg.html">SEG</a>
+              - Prediction of low complexity regions in protein sequences
+            </li>
+            <li>
+              <a target="_blank" href="http://mamiris.com/services.html">ASAquick</a>
+              - Prediction of protein accessible surface area
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-8 col-lg-offset-2">
+          <footer></footer>
+        </div>
+      </div>
+
+    </div>
+    <script src="../uploads.js"></script>
+  </body>
+</html>

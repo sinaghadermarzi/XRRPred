@@ -1,0 +1,97 @@
+BLASTP 2.2.24 [Aug-08-2010]
+
+
+Reference: Altschul, Stephen F., Thomas L. Madden, Alejandro A. Schaffer, 
+Jinghui Zhang, Zheng Zhang, Webb Miller, and David J. Lipman (1997), 
+"Gapped BLAST and PSI-BLAST: a new generation of protein database search
+programs",  Nucleic Acids Res. 25:3389-3402.
+
+
+Reference for compositional score matrix adjustment: Altschul, Stephen F., 
+John C. Wootton, E. Michael Gertz, Richa Agarwala, Aleksandr Morgulis,
+Alejandro A. Schaffer, and Yi-Kuo Yu (2005) "Protein database searches
+using compositionally adjusted substitution matrices", FEBS J. 272:5101-5109.
+
+
+Reference for composition-based statistics starting in round 2:
+Schaffer, Alejandro A., L. Aravind, Thomas L. Madden,
+Sergei Shavirin, John L. Spouge, Yuri I. Wolf,  
+Eugene V. Koonin, and Stephen F. Altschul (2001), 
+"Improving the accuracy of PSI-BLAST protein database searches with 
+composition-based statistics and other refinements",  Nucleic Acids Res. 29:2994-3005.
+
+Query= 6B17-B
+         (14 letters)
+
+Database: nrfilt 
+           11,756,863 sequences; 4,014,994,744 total letters
+
+Searching..................................................done
+
+
+
+ ***** No hits found ******
+
+Searching..................................................done
+
+
+
+ ***** No hits found ******
+
+  Database: nrfilt
+    Posted date:  Sep 15, 2010  7:45 AM
+  Number of letters in database: 999,999,890
+  Number of sequences in database:  2,987,210
+  
+  Database: /home/biomine/programs/db/nrfilt/nrfilt.01
+    Posted date:  Sep 15, 2010  7:51 AM
+  Number of letters in database: 999,999,881
+  Number of sequences in database:  2,894,351
+  
+  Database: /home/biomine/programs/db/nrfilt/nrfilt.02
+    Posted date:  Sep 15, 2010  7:56 AM
+  Number of letters in database: 999,999,887
+  Number of sequences in database:  2,904,257
+  
+  Database: /home/biomine/programs/db/nrfilt/nrfilt.03
+    Posted date:  Sep 15, 2010  8:01 AM
+  Number of letters in database: 999,999,979
+  Number of sequences in database:  2,924,862
+  
+  Database: /home/biomine/programs/db/nrfilt/nrfilt.04
+    Posted date:  Sep 15, 2010  8:02 AM
+  Number of letters in database: 14,995,107
+  Number of sequences in database:  46,183
+  
+Lambda     K      H
+   0.326    0.116    0.356 
+
+Lambda     K      H
+   0.267   0.0356    0.140 
+
+
+Matrix: BLOSUM62
+Gap Penalties: Existence: 11, Extension: 1
+Number of Hits to DB: 134,172,124
+Number of Sequences: 11756863
+Number of extensions: 549030
+Number of successful extensions: 498
+Number of sequences better than 10.0: 0
+Number of HSP's better than 10.0 without gapping: 0
+Number of HSP's successfully gapped in prelim test: 0
+Number of HSP's that attempted gapping in prelim test: 498
+Number of HSP's gapped (non-prelim): 0
+length of query: 14
+length of database: 4,014,994,744
+effective HSP length: 0
+effective length of query: 14
+effective length of database: 4,014,994,744
+effective search space: 56209926416
+effective search space used: 56209926416
+T: 11
+A: 40
+X1: 15 ( 7.1 bits)
+X2: 38 (14.6 bits)
+X3: 64 (24.7 bits)
+S1: 40 (21.9 bits)
+S2: 72 (32.5 bits)
